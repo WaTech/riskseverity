@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Risk Severity</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body>
+    <div ng-controller="SeverityRiskCtrl" ng-app>
+      <div id="scoreResults" ng-show="(selectedSeverityCount+selectedRiskCount)==8">
+	<h2>Oversight Level</h2>
+	<p>
+	Overall project oversight level is <span ng-class="oversightLevelStyle()">{{ oversightLevel() }}</span>
+	</p>
+      </div>
+
+      <div id="severity">
+	<h2>Severity</h2>
+	<table class="table table-bordered">
+	  <caption ng-show="selectedSeverityCount==4" ng-class="scoreStyle(severityScore)">Severity Score {{ severityScore }}</caption>
+	  <caption ng-show="selectedSeverityCount<4" class="red">Please select a score for each category</caption>
+	  <thead>
+	    <tr>
+	      <th ng-repeat="criteria in data.severity">
+		{{ criteria.title }}
+	      </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="i in [ 0,1,2 ]">
+	      <td class="calculator" ng-repeat="criteria in data.severity" ng-click="updateSeverity($index,i)" ng-class="cellStyle(data.severity,$index,i)">{{ criteria.levels[i].text }}</td>
+	    </tr>
+	    <tr class="printOnly">
+	      <td class="calculator" id="severityPrint0"></td>
+	      <td class="calculator" id="severityPrint1"></td>
+	      <td class="calculator" id="severityPrint2"></td>
+	      <td class="calculator" id="severityPrint3"></td>
+	    </tr>
+	  </tbody>
+	</table>
+      </div>
+      
+      <div id="risks">
+	<h2>Risk</h2>
+	<table class="table table-bordered">
+	  <caption ng-show="selectedRiskCount==4" ng-class="scoreStyle(risksScore)">Risks Score {{ risksScore }}</caption>
+	  <caption ng-show="selectedRiskCount<4" class="red">Please select a score for each category</caption>
+	  <thead>
+	    <tr>
+	      <th ng-repeat="criteria in data.risks">
+		{{ criteria.title }}
+	      </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="i in [ 0,1,2 ]">
+	      <td class="calculator" ng-repeat="criteria in data.risks" ng-click="updateRisks($index,i)" ng-class="cellStyle(data.risks,$index,i)">{{ criteria.levels[i].text }}</td>
+	    </tr>
+	    <tr class="printOnly">
+	      <td class="calculator" id="riskPrint0"></td>
+	      <td class="calculator" id="riskPrint1"></td>
+	      <td class="calculator" id="riskPrint2"></td>
+	      <td class="calculator" id="riskPrint3"></td>
+	    </tr>
+	  </tbody>
+	</table>
+      </div>
+      
+    </div>
+  </body>
+</html>
