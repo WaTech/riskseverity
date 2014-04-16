@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Risk Severity</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/app.css"/>
+<div>
+
+    <link rel="stylesheet" href="app.css"/>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap.min.js"></script>
-    <script src="js/controllers.js"></script>
-  </head>
-  <body>
+    <script src="controllers.js"></script>
     <div ng-controller="SeverityRiskCtrl" ng-app>
+
       <div id="scoreResults" ng-show="(selectedSeverityCount+selectedRiskCount)==8">
 	<h2>Oversight Level</h2>
 	<p>
@@ -20,7 +15,10 @@
 
       <div id="severity">
 	<h2>Severity</h2>
-	<table class="table table-bordered">
+        <p>
+          The severity matrix assesses the proposed project's impact on citizens and state operations, its visibility to stakeholders, and the consequences of project failure.
+        </p>
+	<table class="calculator">
 	  <caption ng-show="selectedSeverityCount==4" ng-class="scoreStyle(severityScore)">Severity Score {{ severityScore }}</caption>
 	  <caption ng-show="selectedSeverityCount<4" class="red">Please select a score for each category</caption>
 	  <thead>
@@ -32,13 +30,13 @@
 	  </thead>
 	  <tbody>
 	    <tr ng-repeat="i in [ 0,1,2 ]">
-	      <td class="calculator" ng-repeat="criteria in data.severity" ng-click="updateSeverity($index,i)" ng-class="cellStyle(data.severity,$index,i)">{{ criteria.levels[i].text }}</td>
+	      <td ng-repeat="criteria in data.severity" ng-click="updateSeverity($index,i)" ng-class="cellStyle(data.severity,$index,i)">{{ criteria.levels[i].text }}</td>
 	    </tr>
 	    <tr class="printOnly">
-	      <td class="calculator" id="severityPrint0"></td>
-	      <td class="calculator" id="severityPrint1"></td>
-	      <td class="calculator" id="severityPrint2"></td>
-	      <td class="calculator" id="severityPrint3"></td>
+	      <td id="severityPrint0"></td>
+	      <td id="severityPrint1"></td>
+	      <td id="severityPrint2"></td>
+	      <td id="severityPrint3"></td>
 	    </tr>
 	  </tbody>
 	</table>
@@ -46,7 +44,10 @@
       
       <div id="risks">
 	<h2>Risk</h2>
-	<table class="table table-bordered">
+        <p>
+          The risk matrix measures the impact of the project on the organization, the effort needed to complete the project, the stability of the proposed technology, and agency preparedness.
+        </p>
+	<table class="calculator">
 	  <caption ng-show="selectedRiskCount==4" ng-class="scoreStyle(risksScore)">Risks Score {{ risksScore }}</caption>
 	  <caption ng-show="selectedRiskCount<4" class="red">Please select a score for each category</caption>
 	  <thead>
@@ -71,5 +72,5 @@
       </div>
       
     </div>
-  </body>
-</html>
+
+</div>

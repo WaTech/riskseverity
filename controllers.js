@@ -1,8 +1,8 @@
 'use strict';
 
 function SeverityRiskCtrl($scope, $http) {
-    //$http.get('/sites/default/files/js/data.json').success(function(data) {
-    $http.get('data/data.json').success(function(data) {
+    //$http.get('/sites/default/files/apps/riskseverity/data.json').success(function(data) {
+    $http.get('data.json').success(function(data) {
 	$scope.data = data;
     });
 
