@@ -9,6 +9,7 @@ function SeverityRiskCtrl($scope, $http) {
         });
     } 
 
+    $scope.printMode = false;
     $scope.assessmentDate = new Date().toLocaleDateString();
     $scope.steps = $scope.data.severity.length + $scope.data.risks.length + 1;
 
@@ -49,7 +50,12 @@ function SeverityRiskCtrl($scope, $http) {
             stateData.agency = $scope.agency;
             stateData.project = $scope.project;
         }
-        window.location.hash = encodeURIComponent(JSON.stringify(stateData));
+        var hash = encodeURIComponent(JSON.stringify(stateData));
+
+        var printLink = jQuery("li.print_html:first a")[0];
+        if(printLink) {
+            printLink.hash = hash;
+        }
     };
     
     $scope.scoreText = function(score) {
@@ -97,6 +103,9 @@ function SeverityRiskCtrl($scope, $http) {
         $scope.scores = state.scores;
         $scope.agency = state.agency;
         $scope.project = state.project;
+    }
+    if(jQuery(".print-content").length>0) {
+        $scope.printMode = true;
     }
     $scope.screenChange();
 }

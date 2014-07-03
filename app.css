@@ -1,33 +1,37 @@
-    .Low {
-        font-weight: bold;
-        color: white;
-	background-color: #00b64f;
-    }
-    .Medium {
-        font-weight: bold;
-	background-color: #ffe400;
-    }
-    .High {
-        font-weight: bold;
-        color: white;
-	background-color: #ff3500;
-    }
+.Low {
+    font-weight: bold;
+    color: white;
+    background-color: #00b64f;
+}
+.Medium {
+    font-weight: bold;
+    background-color: #ffe400;
+}
+.High {
+    font-weight: bold;
+    color: white;
+    background-color: #ff3500;
+}
 
-    table {
-	width: 100%;
-    }
-    caption
-    {
-        font-weight: bold;
-	font-size: 1.25em;
-    }
-    th {
-	width: 25%;
-    }
+table {
+    width: 100%;
+}
+caption
+{
+    font-weight: bold;
+    font-size: 1.25em;
+}
+th {
+    width: 25%;
+}
 
 @media screen {
     label {
         font-weight: bold;
+    }
+    p.criteria {
+        font-weight: normal;
+        white-space: pre-line;
     }
 }
 
