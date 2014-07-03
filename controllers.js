@@ -1,101 +1,80 @@
-'use strict';
-
 function SeverityRiskCtrl($scope, $http) {
-    //$http.get('/sites/default/files/apps/riskseverity/data.json').success(function(data) {
-    $http.get('data.json').success(function(data) {
-	$scope.data = data;
-    });
+    'use strict';
 
-    $scope.risksScore = 0;
-    $scope.severityScore = 0;
-    $scope.risksScoreStyle = '';
-    $scope.severityScoreStyle = '';
-    $scope.selectedSeverityCount = 0;
-    $scope.selectedRiskCount = 0;
+    if(appConfig.data) {
+        $scope.data = appConfig.data;
+    } else if(appConfig.dataUrl) {
+        $http.get(appConfig.dataUrl).success(function(data) {
+            $scope.data = data;
+        });
+    } 
 
+    $scope.stageGroup = 'Severity';
+    $scope.stage = $scope.data.severity[0];
+    $scope.step = 1;
+    $scope.steps = $scope.data.severity.length + $scope.data.risks.length + 1;
+    $scope.scores = [];
 
-    $scope.updateSeverity = function(col,row) {
-	var severity = $scope.data.severity;
-	severity[col].selected = row;
-	
-	$scope.severityScore = 0;
-	$scope.selectedSeverityCount = 0;
-	for(var i=0;i<severity.length; i++) {
-	    var selected = severity[i].selected;
-	    if(selected!=null) {
-		$scope.selectedSeverityCount++;
-		$scope.severityScore += severity[i].levels[selected].score;
-	    }
-	}
-	$scope.severityScoreStyle = $scope.scoreStyle($scope.severityScore);
+    $scope.next = function() {
+        $scope.step++;
+        screenChange();
+    };
 
-	// setup print table row
-	var printCell = angular.element(document.querySelector('#severityPrint'+col));
-	var printContent = severity[col].levels[row].text;
-	printCell.html(printContent);
-    }
+    $scope.previous = function() {
+        $scope.step--;
+        screenChange();
+    };
 
-    $scope.updateRisks = function(col,row) {
-	var risks = $scope.data.risks;
-	risks[col].selected = row;
-	
-	$scope.risksScore = 0;
-	$scope.selectedRiskCount = 0;
-	for(var i=0;i<risks.length; i++) {
-	    var selected = risks[i].selected;
-	    if(selected!=null) {
-		$scope.selectedRiskCount++;
-		$scope.risksScore += risks[i].levels[selected].score;
-	    }
-	}
-	$scope.risksScoreStyle = $scope.scoreStyle($scope.risksScore);
-
-	// setup print table row
-	var printCell = angular.element(document.querySelector('#riskPrint'+col));
-	var printContent = risks[col].levels[row].text;
-	printCell.html(printContent);
-    }
-
-    $scope.oversightLevel = function() {
-	if($scope.selectedRiskCount+$scope.selectedSeverityCount<8) {
-	    return '';
-	}
-
-	var score = $scope.risksScore + $scope.severityScore;
-	if(score<=13)
-	    return 'Level 1 - Low';
-	if(score<=19)
-	    return 'Level 2 - Medium';
-	else
-	    return 'Level 3 - High';
-    }
-    $scope.oversightLevelStyle = function() {
-	switch($scope.oversightLevel()) {
-	case 'Level 1 - Low':
-	    return 'green';
-	case 'Level 2 - Medium':
-	    return 'yellow';
-	case 'Level 3 - High':
-	    return 'red';
-	default:
-	    return '';
-	}
+    function screenChange() {
+        if($scope.step < $scope.data.severity.length+1) {
+            $scope.stageGroup = 'Severity';
+            $scope.stage = $scope.data.severity[$scope.step-1];
+        } else if($scope.step < $scope.data.risks.length + 1 + $scope.data.severity.length) {
+            $scope.stageGroup = 'Risks';            
+            $scope.stage = $scope.data.risks[$scope.step -  1 - $scope.data.severity.length];
+        } else {
+            // final step
+            $scope.assessmentDate = new Date().toLocaleDateString();
+        }
     }
     
+    $scope.scoreText = function(score) {
+        switch(score) {
+        case 1:
+            return 'Low';
+        case 2:
+            return 'Medium';
+        case 3:
+            return 'High';
+        }
+        return '';
+    };
 
-    $scope.cellStyle = function(category,col,row) {
-	if(category[col].selected===row)
-	    return 'selected';
-	return '';
-    }
+    $scope.oversightLevel = function() {
+        var score = 0;
+        for(var i=0; i<$scope.scores.length; i++) {
+            score += $scope.scores[i];
+        }
 
-    $scope.scoreStyle = function(score) {
-	if(score >= 10)
-	    return 'red';
-	if(score >= 6)
-	    return 'yellow';
-	if(score >= 4)
-	    return 'green';
-	return '';
-    }
+        if(score<=13)
+            return 'Level 1 - Low';
+        if(score<=19)
+            return 'Level 2 - Medium';
+        else
+            return 'Level 3 - High';
+    };
+    $scope.oversightLevelStyle = function() {
+        switch($scope.oversightLevel()) {
+        case 'Level 1 - Low':
+            return 'Low';
+        case 'Level 2 - Medium':
+            return 'Medium';
+        case 'Level 3 - High':
+            return 'High';
+        default:
+            return '';
+        }
+    };
+
 }
+

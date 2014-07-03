@@ -3,53 +3,65 @@
 	"title": "Impact on Clients",
 	"name": "clientImpact",
 	"levels": [{
-		"text": "Direct contact with citizens, political subdivisions, and service providers – including systems that process benefits, payments, and similar transactions.\n\nDirect use by citizens, political subdivisions, and service providers (e.g. Medicaid payment systems, online driver’s license renewals, reservation systems such as parks and ferries).",
-		"score": 3
-	    },{
-		"text": "Indirect impacts on citizens, political subdivisions, and service providers through management systems that support decisions that are viewed as important by the public.\n\nAccess by citizens for information and research purposes.",
-		"score": 2
-	    },{
-		"text": "Agency operations only.",
-		"score": 1
-	    }]
+	    "text": "Direct contact with citizens, political subdivisions, and service providers – including systems that process benefits, payments, and similar transactions.\n\nDirect use by citizens, political subdivisions, and service providers (e.g. Medicaid payment systems, online driver’s license renewals, reservation systems such as parks and ferries).",
+	    "score": 3,
+	    "scoreLabel": "High"
+	},{
+	    "text": "Indirect impacts on citizens, political subdivisions, and service providers through management systems that support decisions that are viewed as important by the public.\n\nAccess by citizens for information and research purposes.",
+	    "score": 2,
+	    "scoreLabel": "Medium"
+	},{
+	    "text": "Agency operations only.",
+	    "score": 1,
+	    "scoreLabel": "Low"
+	}]
     },{
 	"title": "Visibility",
 	"name": "visibility",
 	"levels": [{
 	    "text": "Highly visible to public, trading partners, political subdivisions and Legislature.\n\nLikely subject to legislative hearings.\n\nSystem processes sensitive / confidential data (e.g. personally identifiable information, HIPAA, medical, social security numbers, credit card numbers).\n\nRequired changes to existing RCWs and WACs have not been completed.",
-	    "score": 3
+	    "score": 3,
+	    "scoreLabel": "High"
 	},{
 	    "text": "Some visibility to the Legislature, trading partners, or public the system / program supports.\n\nMay be subject to legislative hearing.",
-	    "score": 2
+	    "score": 2,
+	    "scoreLabel": "Medium"
 	},{
 	    "text": "Internal agency only.",
-	    "score": 1
+	    "score": 1,
+	    "scoreLabel": "Low"
 	}]
     },{
 	"title": "Impact on State Operations",
 	"name": "stateImpact",
 	"levels": [{
 	    "text": "Multiple agency involvement / impact.\n\nAgency has no funding or has not identified funding for ongoing maintenance and operations of the system after Go-Live.\n\nSignificant architectural change to a mission critical system.\n\nDuplication (compete with) of an existing service or system provided (offered) by another state agency.\n\nReplacement of or significant modification to an existing core admin/financial system (AFRS, HRMS, TALS, TRAINS).",
-	    "score": 3
+	    "score": 3,
+	    "scoreLabel": "High"
 	},{
 	    "text": "Multiple divisions or programs within a single agency.\n\nRequires approval by the OCIO of a waiver to OCIO policies or technology standards.",
-	    "score": 2
+	    "score": 2,
+	    "scoreLabel": "Medium"
 	},{
 	    "text": "Single division within one agency. \n\nImprove or expand existing networks or mainframes with similar technology.\n\nAdequate maintenance and operations funding is identified and is expected to be available.",
-	    "score": 1
+	    "score": 1,
+	    "scoreLabel": "Low"
 	}]
     },{
 	"title": "Failure or Nil Consequence",
 	"name": "consequence",
 	"levels": [{
 	    "text": "Inability to meet state or federal mandate.\n\nInability to meet agency mission.\n\nLoss of significant federal funding.\n\nHigh probability of near term system failure.",
-	    "score": 3
+	    "score": 3,
+	    "scoreLabel": "High"
 	},{
 	    "text": "Potential failure of aging systems.",
-	    "score": 2
+	    "score": 2,
+	    "scoreLabel": "Medium"
 	},{
 	    "text": "Loss of opportunity for improved service delivery or efficiency.\n\nFailure to resolve customer service complaints or requests.",
-	    "score": 1
+	    "score": 1,
+	    "scoreLabel": "Low"
 	}]
     }],
     
@@ -58,52 +70,65 @@
 	"name": "impact",
 	"levels": [{
 	    "text": "Replacement of a mission critical system.\n\nSignificant change to business rules.\n\nMultiple agencies are affected.\n\nOne or more organizations outside of state government are affected. \n\nRequires extensive and substantial job training for work groups.\n\nSignificant collective bargaining agreement negotiations may be required.",
-	    "score": 3
+	    "score": 3,
+	    "scoreLabel": "High"
 	},{
 	    "text": "Moderate change to business rules.\n\nMajor enhancement or moderate change of mission critical system*. \n\nMedium complexity business process(es).\n\nRequires moderate job training.",
-	    "score": 2
+	    "score": 2,
+	    "scoreLabel": "Medium"
 	},{
 	    "text": "Insignificant or no change to business rules.\n\nLow complexity business process(es).\n\nSome job training could be required.",
-	    "score": 1
+	    "score": 1,
+	    "scoreLabel": "Low"
 	}]
     },{
 	"title": "Development Effort & Resources",
 	"name": "development",
 	"levels": [{
-	    "text": "Detailed requirements, detailed design, development, and implementation exceed 24 months.\n\nRequires more than one funding cycle to obtain funding for project.\n\nProject staff are not dedicated to the project, and project assignments are not the highest priority. \n\nProject is not adequately staffed.\n\nSchedule is mandated by an outside organization and there is high likelihood that development and implementation cannot be completed within the schedule.\n\nProject funding is inadequate or has not been secured.\n\nKey project staff do not have adequate training or experience to fulfill their project roles and responsibilities.",
-	    "score": 3
+	    "text": "Detailed requirements, detailed design, development, and implementation exceed 2,
+	    "scoreLabel": "Medium"4 months.\n\nRequires more than one funding cycle to obtain funding for project.\n\nProject staff are not dedicated to the project, and project assignments are not the highest priority. \n\nProject is not adequately staffed.\n\nSchedule is mandated by an outside organization and there is high likelihood that development and implementation cannot be completed within the schedule.\n\nProject funding is inadequate or has not been secured.\n\nKey project staff do not have adequate training or experience to fulfill their project roles and responsibilities.",
+	    "score": 3,
+	    "scoreLabel": "High"
 	},{
 	    "text": "12 to 24 months for detailed requirements, detailed design, development, and implementation.\n\nProject staff are not dedicated to the project, but agency management ensures project assignments have highest priority.",
-	    "score": 2
+	    "score": 2,
+	    "scoreLabel": "Medium"
 	},{
 	    "text": "Under 12 months for Detailed requirements, detailed design, development, and implementation.\n\nProject staff are assigned full time to the project.\n\nProject has adequate staff.\n\nHigh likelihood that development and implementation can be completed within the approved schedule.\n\nProject funding does not require more than one funding cycle.\n\nProject funding is confirmed.\n\nKey project staff have adequate training or experience to fulfill their project roles and responsibilities.",
-	    "score": 1
+	    "score": 1,
+	    "scoreLabel": "Low"
 	}]
     },{
 	"title": "Technology",
 	"name": "technology",
 	"levels": [{
 	    "text": "Emerging technologies; new to the IT industry.\n\nTwo or more of the following are new for agency technology staff or integrator, or are new to the agency architecture and will require significant agency staff training: \n\nsubscription services (e.g., SaaS, IaaS, PaaS, cloud computing); outsourcing; programming languages; operating systems; database products; development tools; Payment Card Industry Data Security Standards (PCI-DSS).",
-	    "score": 3
+	    "score": 3,
+	    "scoreLabel": "High"
 	},{
 	    "text": "New in agency with 3rd party expertise and knowledge transfer. \n\nOne of the following are new for agency technology staff or integrator, or are new to the agency architecture and will require significant agency staff training: \n\nsubscription services (e.g., SaaS, IaaS, PaaS, cloud computing); outsourcing; programming languages; operating systems; database products; development tools;",
-	    "score": 2
+	    "score": 2,
+	    "scoreLabel": "Medium"
 	},{
 	    "text": "Proposed technology is no more than one major version back.\n\nProposed technology is commonly used throughout the agency and is well supported and understood.",
-	    "score": 1
+	    "score": 1,
+	    "scoreLabel": "Low"
 	}]
     },{
 	"title": "Capability & Management",
 	"name": "capability",
 	"levels": [{
 	    "text": "Executive sponsor does not have authority to allocate resources to the project.\n\nExecutive sponsor has not been an executive sponsor for a project of similar size and complexity. \n\nAgency uses ad-hoc IT project management processes.\n\nAgency and/or vendor track record suggests inability to mitigate risk on project.\n\nAgency has demonstrated inability to effectively manage vendor and contracts on projects of similar size and complexity.",
-	    "score": 3
+	    "score": 3,
+	    "scoreLabel": "High"
 	},{
 	    "text": "Executive sponsor has demonstrated lack of active engagement on prior projects. \n\nExecutive sponsor has been an executive sponsor on prior projects, but of lesser size and complexity.\n\nAgency and/or vendor record indicates good level of success but without the structure for repeatability.\n\nAgency has demonstrated effective vendor and contract management on projects of lesser size and complexity.",
-	    "score": 2
+	    "score": 2,
+	    "scoreLabel": "Medium"
 	},{
 	    "text": "Executive sponsor has authority to allocate resources to the project.\n\nExecutive sponsor has been an effective executive sponsor over projects of similar size and complexity. \n\nAgency and vendor have strong ability to mitigate risk on projects. \n\nAgency uses documented and repeatable processes for project management.\n\nAgency routinely uses continuous process improvement throughout the life of the project. \n\nAgency has demonstrated effective vendor and contract management on projects of similar size and complexity.",
-	    "score": 1
+	    "score": 1,
+	    "scoreLabel": "Low"
 	}]
     }]
 }

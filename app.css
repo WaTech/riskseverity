@@ -1,53 +1,41 @@
-@media screen {
-    
-    table.calculator thead th {
-        width: 25%;
+    .Low {
+        font-weight: bold;
+        color: white;
+	background-color: #00b64f;
     }
-    table.calculator tbody td {
-	white-space: pre-line;
+    .Medium {
+        font-weight: bold;
+	background-color: #ffe400;
     }
-    
-    table.calculator td:hover, td.selected {
-	background-color: #d9edf7;
-    }
-    
-    table.calculator tbody tr.printOnly {
-	display: none;
+    .High {
+        font-weight: bold;
+        color: white;
+	background-color: #ff3500;
     }
 
-    .green {
-	background-color: #dff0d8;
-    }
-    .yellow {
-	background-color: #fcf8e3;
-    }
-    .red {
-	background-color: #f2dede;
-    }
-
-}
-
-@media print {
-    body {
-	font-size: 0.55em;
-    }
-    #scoreResults {
-	font-size: 2em;
-    }
-    h2 {
-	display: none;
+    table {
+	width: 100%;
     }
     caption
     {
-	font-size: 1.5em;
+        font-weight: bold;
+	font-size: 1.25em;
     }
     th {
 	width: 25%;
     }
-    table tbody tr {
-	display: none;
+
+@media screen {
+    label {
+        font-weight: bold;
     }
-    table.calculator tbody tr.printOnly {
-	display: table-row;
+}
+
+@media print {
+    input {
+        display: none;
+    }
+    .no-print {
+        display: none;
     }
 }

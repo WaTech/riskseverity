@@ -1,26 +1,53 @@
+<!-- build:remove -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Risk Severity</title>
+  </head>
+  <body>
+<!-- /build -->
 <div>
 
+    <!-- build:style inline bundle -->
     <link rel="stylesheet" href="app.css"/>
+    <!-- /build -->
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+
+    <!-- build:script inline main -->
+    <script src="config.js"></script>
     <script src="controllers.js"></script>
-    <div ng-controller="SeverityRiskCtrl" ng-app>
+    <!-- /build -->
 
-      <div id="scoreResults" ng-show="(selectedSeverityCount+selectedRiskCount)==8">
-	<h2>Oversight Level</h2>
-	<p>
-	Overall project oversight level is <span ng-class="oversightLevelStyle()">{{ oversightLevel() }}</span>
-	</p>
+    <div ng-controller="SeverityRiskCtrl" ng-app>
+      
+      <div ng-show="step===steps && agency && project">
+        <h1>{{ project }}</h1>
+        <h2>{{ agency }}</h2>
+        <p>Assessment completed {{ assessmentDate }}</p>
       </div>
 
-      <div id="severity">
-	<h2>Severity</h2>
-        <p>
-          The severity matrix assesses the proposed project's impact on citizens and state operations, its visibility to stakeholders, and the consequences of project failure.
-        </p>
-	<table class="calculator">
-	  <caption ng-show="selectedSeverityCount==4" ng-class="scoreStyle(severityScore)">Severity Score {{ severityScore }}</caption>
-	  <caption ng-show="selectedSeverityCount<4" class="red">Please select a score for each category</caption>
+      <div ng-show="step < steps">
+        <h2>{{ stageGroup }} - {{ stage.title }} (Step {{ step }}/{{ steps }})</h2>
+        <div style="display: inline-block; width: 30%; vertical-align: top;" ng-repeat="level in stage.levels">
+          <label>
+            <input type="radio" name="score" ng-model="$parent.scores[step-1]" ng-value="level.score"/>
+            {{ level.scoreLabel }}
+          </label>
+          <p style="white-space: pre-line;">
+          {{ level.text }}
+          </p>
+        </div>
+      </div>
+
+      <div ng-show="step===steps">
+	<h3>Oversight Level</h3>
+	<p>
+	  Overall project oversight level is <span ng-class="oversightLevelStyle()">{{ oversightLevel() }}</span>
+	</p>
+
+	<table>
+	  <caption>Severity</caption>
 	  <thead>
 	    <tr>
 	      <th ng-repeat="criteria in data.severity">
@@ -29,27 +56,16 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr ng-repeat="i in [ 0,1,2 ]">
-	      <td ng-repeat="criteria in data.severity" ng-click="updateSeverity($index,i)" ng-class="cellStyle(data.severity,$index,i)">{{ criteria.levels[i].text }}</td>
-	    </tr>
-	    <tr class="printOnly">
-	      <td id="severityPrint0"></td>
-	      <td id="severityPrint1"></td>
-	      <td id="severityPrint2"></td>
-	      <td id="severityPrint3"></td>
+	    <tr>
+              <td ng-class="scoreText(scores[i])" ng-repeat="i in [ 0,1,2,3 ]">
+                {{ scoreText(scores[i]) }}
+              </td>
 	    </tr>
 	  </tbody>
 	</table>
-      </div>
-      
-      <div id="risks">
-	<h2>Risk</h2>
-        <p>
-          The risk matrix measures the impact of the project on the organization, the effort needed to complete the project, the stability of the proposed technology, and agency preparedness.
-        </p>
-	<table class="calculator">
-	  <caption ng-show="selectedRiskCount==4" ng-class="scoreStyle(risksScore)">Risks Score {{ risksScore }}</caption>
-	  <caption ng-show="selectedRiskCount<4" class="red">Please select a score for each category</caption>
+
+	<table>
+	  <caption>Risks</caption>
 	  <thead>
 	    <tr>
 	      <th ng-repeat="criteria in data.risks">
@@ -58,19 +74,34 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr ng-repeat="i in [ 0,1,2 ]">
-	      <td class="calculator" ng-repeat="criteria in data.risks" ng-click="updateRisks($index,i)" ng-class="cellStyle(data.risks,$index,i)">{{ criteria.levels[i].text }}</td>
-	    </tr>
-	    <tr class="printOnly">
-	      <td class="calculator" id="riskPrint0"></td>
-	      <td class="calculator" id="riskPrint1"></td>
-	      <td class="calculator" id="riskPrint2"></td>
-	      <td class="calculator" id="riskPrint3"></td>
+	    <tr>
+              <td ng-class="scoreText(scores[i])" ng-repeat="i in [ 4,5,6,7 ]">
+                {{ scoreText(scores[i]) }}
+              </td>
 	    </tr>
 	  </tbody>
 	</table>
       </div>
-      
+
+      <div>
+        <input type="button" value="Previous" ng-show="step!=1" ng-click="previous();"/>
+        <input type="button" value="Next" ng-disabled="!scores[step-1]" ng-show="step<steps" ng-click="next();"/>
+      </div>
+
+      <div class="no-print" ng-show="step===steps">
+        <hr/>
+        <p>
+          To create a printer friendly page to submit to OCIO, please fill in the following fields:
+        </p>
+        <label>Project: <input type="text" length="60" ng-model="project"/></label><br/>
+        <label>Agency: <input type="text" length="60" ng-model="agency"/></label><br/>
+      </div>
+
+     
     </div>
 
 </div>
+<!-- build:remove -->
+  </body>
+</html>
+<!-- /build -->
