@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         htmlbuild: {
             dist: {
                 src: 'app.html',
-                dest: 'build/',
+                dest: 'dist/',
                 options: {
                     beautify: false,
                     relative: true,
