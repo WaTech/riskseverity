@@ -38,13 +38,13 @@ function SeverityRiskCtrl($scope, $http) {
         }
         
         $scope.storeState();
-    }
+    };
 
     $scope.storeState = function() {
         var stateData = {
             step: $scope.step,
             scores: $scope.scores
-        }
+        };
         if($scope.step===$scope.steps) {
             stateData.agency = $scope.agency;
             stateData.project = $scope.project;
