@@ -9,23 +9,24 @@ function SeverityRiskCtrl($scope, $http) {
         });
     } 
 
-    $scope.stageGroup = 'Severity';
-    $scope.stage = $scope.data.severity[0];
-    $scope.step = 1;
+    $scope.assessmentDate = new Date().toLocaleDateString();
     $scope.steps = $scope.data.severity.length + $scope.data.risks.length + 1;
+
+    
+    $scope.step = 1;
     $scope.scores = [];
 
     $scope.next = function() {
         $scope.step++;
-        screenChange();
+        $scope.screenChange();
     };
 
     $scope.previous = function() {
         $scope.step--;
-        screenChange();
+        $scope.screenChange();
     };
 
-    function screenChange() {
+    $scope.screenChange = function() {
         if($scope.step < $scope.data.severity.length+1) {
             $scope.stageGroup = 'Severity';
             $scope.stage = $scope.data.severity[$scope.step-1];
@@ -34,9 +35,22 @@ function SeverityRiskCtrl($scope, $http) {
             $scope.stage = $scope.data.risks[$scope.step -  1 - $scope.data.severity.length];
         } else {
             // final step
-            $scope.assessmentDate = new Date().toLocaleDateString();
         }
+        
+        $scope.storeState();
     }
+
+    $scope.storeState = function() {
+        var stateData = {
+            step: $scope.step,
+            scores: $scope.scores
+        }
+        if($scope.step===$scope.steps) {
+            stateData.agency = $scope.agency;
+            stateData.project = $scope.project;
+        }
+        window.location.hash = encodeURIComponent(JSON.stringify(stateData));
+    };
     
     $scope.scoreText = function(score) {
         switch(score) {
@@ -76,5 +90,14 @@ function SeverityRiskCtrl($scope, $http) {
         }
     };
 
+    // init
+    if(window.location.hash) {
+        var state = JSON.parse(decodeURIComponent(window.location.hash.replace(/^#/,'')));
+        $scope.step = state.step;
+        $scope.scores = state.scores;
+        $scope.agency = state.agency;
+        $scope.project = state.project;
+    }
+    $scope.screenChange();
 }
 
