@@ -24,7 +24,7 @@
     <!-- /build -->
 
     <div ng-controller="SeverityRiskCtrl" ng-app>
-      
+
       <div ng-show="step===steps && agency && project">
         <h1>Project Name: {{ project }}</h1>
         <h2>Agency: {{ agency }}</h2>
@@ -103,7 +103,7 @@
 	  </tbody>
 	</table>
       </div>
-
+      
       <div>
         <input type="button" value="Previous" ng-show="step!=1 && !printMode" ng-click="previous();"/>
         <input type="button" value="Next" ng-disabled="!scores[step-1]" ng-show="step<steps && !printMode" ng-click="next();"/>
@@ -112,25 +112,25 @@
       <div class="no-print" ng-show="step===steps && !printMode">
         <hr/>
         <p>
-          To create a printer friendly page to submit to OCIO, please fill in the following fields:
+          To create a printer friendly page to submit to OCIO, please fill in the fields below.  Or start over with a <input type="button" ng-click="startOver()" value="New Assessment"/>
         </p>
         <label>Project: <input type="text" length="60" ng-model="project" ng-change="storeState();"/></label><br/>
         <label>Agency: <input type="text" length="60" ng-model="agency" ng-change="storeState();"/></label><br/>
       </div>
 
-     
+      <!-- build:remove -->
+      <div ng-hide="printMode">
+        <ul>
+          <li class="print_html first">
+            <a href="app.html?print=true" title="Display a printer-friendly version of this page." class="print-page" onclick="window.open(this.href); return false" rel="nofollow">Printer-friendly</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /build -->
     </div>
 
 </div>
 <!-- build:remove -->
-  <div>
-    <ul>
-      <li class="print_html first">
-        <a href="app.html" title="Display a printer-friendly version of this page." class="print-page" onclick="window.open(this.href); return false" rel="nofollow">Printer-friendly</a>
-      </li>
-    </ul>
-  </div>
-
   </body>
 </html>
 <!-- /build -->

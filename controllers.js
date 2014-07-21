@@ -50,14 +50,15 @@ function SeverityRiskCtrl($scope, $http) {
             stateData.agency = $scope.agency;
             stateData.project = $scope.project;
         }
-        var hash = encodeURIComponent(JSON.stringify(stateData));
-
-        var printLink = jQuery("li.print_html:first a")[0];
-        if(printLink) {
-            printLink.hash = hash;
-        }
+        
+        sessionStorage.setItem('riskSeverityState', JSON.stringify(stateData));
     };
     
+    $scope.startOver = function() {
+        $scope.step = 1;
+        $scope.screenChange();
+    };
+
     $scope.scoreText = function(score) {
         switch(score) {
         case 1:
@@ -97,14 +98,19 @@ function SeverityRiskCtrl($scope, $http) {
     };
 
     // init
-    if(window.location.hash) {
-        var state = JSON.parse(decodeURIComponent(window.location.hash.replace(/^#/,'')));
-        $scope.step = state.step;
-        $scope.scores = state.scores;
-        $scope.agency = state.agency;
-        $scope.project = state.project;
+    //if(window.location.hash) {
+    //var state = JSON.parse(decodeURIComponent(window.location.hash.replace(/^#/,'')));
+    if(window.sessionStorage) {
+        var stateDoc = window.sessionStorage.getItem('riskSeverityState');
+        if(stateDoc) {
+            var state = JSON.parse(stateDoc);
+            $scope.step = state.step;
+            $scope.scores = state.scores;
+            $scope.agency = state.agency;
+            $scope.project = state.project;
+        }
     }
-    if(jQuery(".print-content").length>0) {
+    if(jQuery(".print-content").length>0 || window.location.search==='?print=true') {
         $scope.printMode = true;
     }
     $scope.screenChange();
