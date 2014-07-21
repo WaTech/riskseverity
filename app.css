@@ -24,14 +24,18 @@ caption
 th {
     width: 25%;
 }
+td {
+    vertical-align: top;
+}
+
+.criteria {
+    font-weight: normal;
+    white-space: pre-line;
+}
 
 @media screen {
     label {
         font-weight: bold;
-    }
-    p.criteria {
-        font-weight: normal;
-        white-space: pre-line;
     }
 }
 
@@ -41,5 +45,8 @@ th {
     }
     .no-print {
         display: none;
+    }
+    .criteria {
+        font-size: 70%;
     }
 }

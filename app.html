@@ -26,8 +26,8 @@
     <div ng-controller="SeverityRiskCtrl" ng-app>
       
       <div ng-show="step===steps && agency && project">
-        <h1>{{ project }}</h1>
-        <h2>{{ agency }}</h2>
+        <h1>Project Name: {{ project }}</h1>
+        <h2>Agency: {{ agency }}</h2>
         <p>Assessment completed {{ assessmentDate }}</p>
       </div>
 
@@ -42,7 +42,7 @@
         <h2>{{ stageGroup }} - {{ stage.title }} (Step {{ step }}/{{ steps }})</h2>
         <div style="display: inline-block; width: 30%; vertical-align: top;" ng-repeat="level in stage.levels">
           <label>
-            <input type="radio" name="score" ng-model="$parent.scores[step-1]" ng-value="level.score"/>
+            <input type="radio" name="score" ng-model="$parent.scores[step-1]" ng-value="level"/>
             {{ level.scoreLabel }}
             <p class="criteria">
               {{ level.text }}
@@ -68,8 +68,13 @@
 	  </thead>
 	  <tbody>
 	    <tr>
-              <td ng-class="scoreText(scores[i])" ng-repeat="i in [ 0,1,2,3 ]">
-                {{ scoreText(scores[i]) }}
+              <td ng-repeat="i in [ 0,1,2,3 ]">
+                <div ng-class="scoreText(scores[i].score)">
+                  {{ scoreText(scores[i].score) }}
+                </div>
+                <div class="criteria">
+                  {{ scores[i].text }}
+                </div>
               </td>
 	    </tr>
 	  </tbody>
@@ -86,8 +91,13 @@
 	  </thead>
 	  <tbody>
 	    <tr>
-              <td ng-class="scoreText(scores[i])" ng-repeat="i in [ 4,5,6,7 ]">
-                {{ scoreText(scores[i]) }}
+              <td ng-repeat="i in [ 4,5,6,7 ]">
+                <div ng-class="scoreText(scores[i].score)">
+                  {{ scoreText(scores[i].score) }}
+                </div>
+                <div class="criteria">
+                  {{ scores[i].text }}
+                </div>
               </td>
 	    </tr>
 	  </tbody>
