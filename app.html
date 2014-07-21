@@ -42,7 +42,7 @@
         <h2>{{ stageGroup }} - {{ stage.title }} (Step {{ step }}/{{ steps }})</h2>
         <div style="display: inline-block; width: 30%; vertical-align: top;" ng-repeat="level in stage.levels">
           <label>
-            <input type="radio" name="score" ng-model="$parent.scores[step-1]" ng-value="level"/>
+            <input type="radio" name="score" ng-model="$parent.selections[step-1]" ng-value="level"/>
             {{ level.scoreLabel }}
             <p class="criteria">
               {{ level.text }}
@@ -69,11 +69,11 @@
 	  <tbody>
 	    <tr>
               <td ng-repeat="i in [ 0,1,2,3 ]">
-                <div ng-class="scoreText(scores[i].score)">
-                  {{ scoreText(scores[i].score) }}
+                <div ng-class="scoreText(selections[i].score)">
+                  {{ scoreText(selections[i].score) }}
                 </div>
                 <div class="criteria">
-                  {{ scores[i].text }}
+                  {{ selections[i].text }}
                 </div>
               </td>
 	    </tr>
@@ -92,11 +92,11 @@
 	  <tbody>
 	    <tr>
               <td ng-repeat="i in [ 4,5,6,7 ]">
-                <div ng-class="scoreText(scores[i].score)">
-                  {{ scoreText(scores[i].score) }}
+                <div ng-class="scoreText(selections[i].score)">
+                  {{ scoreText(selections[i].score) }}
                 </div>
                 <div class="criteria">
-                  {{ scores[i].text }}
+                  {{ selections[i].text }}
                 </div>
               </td>
 	    </tr>
@@ -106,7 +106,7 @@
       
       <div>
         <input type="button" value="Previous" ng-show="step!=1 && !printMode" ng-click="previous();"/>
-        <input type="button" value="Next" ng-disabled="!scores[step-1]" ng-show="step<steps && !printMode" ng-click="next();"/>
+        <input type="button" value="Next" ng-disabled="!selections[step-1]" ng-show="step<steps && !printMode" ng-click="next();"/>
       </div>
 
       <div class="no-print" ng-show="step===steps && !printMode">

@@ -15,7 +15,7 @@ function SeverityRiskCtrl($scope, $http) {
 
     
     $scope.step = 1;
-    $scope.scores = [];
+    $scope.selections = [];
 
     $scope.next = function() {
         $scope.step++;
@@ -44,7 +44,7 @@ function SeverityRiskCtrl($scope, $http) {
     $scope.storeState = function() {
         var stateData = {
             step: $scope.step,
-            scores: $scope.scores
+            selections: $scope.selections
         };
         if($scope.step===$scope.steps) {
             stateData.agency = $scope.agency;
@@ -56,7 +56,7 @@ function SeverityRiskCtrl($scope, $http) {
     
     $scope.startOver = function() {
         $scope.step = 1;
-        $scope.scores = [];
+        $scope.selections = [];
         $scope.screenChange();
     };
 
@@ -74,8 +74,8 @@ function SeverityRiskCtrl($scope, $http) {
 
     $scope.oversightLevel = function() {
         var score = 0;
-        for(var i=0; i<$scope.scores.length; i++) {
-            score += $scope.scores[i];
+        for(var i=0; i<$scope.selections.length; i++) {
+            score += $scope.selections[i].score;
         }
 
         if(score<=13)
@@ -106,7 +106,7 @@ function SeverityRiskCtrl($scope, $http) {
         if(stateDoc) {
             var state = JSON.parse(stateDoc);
             $scope.step = state.step;
-            $scope.scores = state.scores;
+            $scope.selections = state.selections;
             $scope.agency = state.agency;
             $scope.project = state.project;
         }
