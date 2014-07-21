@@ -56,6 +56,7 @@ function SeverityRiskCtrl($scope, $http) {
     
     $scope.startOver = function() {
         $scope.step = 1;
+        $scope.scores = [];
         $scope.screenChange();
     };
 
